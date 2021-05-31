@@ -1,0 +1,311 @@
+<div>
+  <a [routerLink]="['/Manager/ListStudent']">חזור לרשימת התלמידים</a>
+</div>
+
+<h4 *ngIf="!addStudent" style="text-align: center;">התלמיד: {{ student.FirstName + " "+ student.LastName}}</h4>
+<mat-tab-group mat-align-tabs="center" #tabGroup >
+  <!-- פרטים אישיים -->
+  <mat-tab >
+    <ng-template mat-tab-label >
+      <!-- <mat-icon>playlist_add_check</mat-icon> -->
+      פרטי אישיים
+    </ng-template>
+    <div class="container" style=" text-align: right;">
+      <h3>פרטי תלמיד</h3>
+      <form (ngSubmit)="submit()" #studentForm>
+        <fieldset [disabled]=disabledStudent>
+          <!-- פרטי תלמיד-->
+          <div class="row">
+            <div class="form-outline mb-4 col-4">
+              <input type="text" id="firstNameS" [(ngModel)]="student.FirstName" class="form-control" name="firstNameS"
+                #firstNameS="ngModel" required pattern="[A-Za-zא-ת ]*" />
+              <div class="form-group">
+                <div class="alert-danger" *ngIf="firstNameS.invalid && (firstNameS.dirty || firstNameS.touched)">
+                  <div class="alert-danger" *ngIf="firstNameS.errors.required"> שדה חובה!</div>
+                  <div class="alert-danger" *ngIf="firstNameS.errors.pattern">ערכים לא תקינים!</div>
+                </div>
+              </div>
+              <label class="form-label" for="firstNameS">שם פרטי</label>
+            </div>
+
+            <div class="form-outline mb-4 col-4">
+              <input type="text" id="lastNameS" class="form-control" name="lastNameS" [(ngModel)]="student.LastName"
+                class="form-control" #lastNameS="ngModel" required pattern="[A-Za-zא-ת ]*" />
+              <div class="form-group">
+                <div class="alert-danger" *ngIf="lastNameS.invalid && (lastNameS.dirty || lastNameS.touched)">
+                  <div class="alert-danger" *ngIf="lastNameS.errors.required"> שדה חובה!</div>
+                  <div class="alert-danger" *ngIf="lastNameS.errors.pattern">ערכים לא תקינים!</div>
+                </div>
+              </div>
+              <label class="form-label" for="lastNameS">שם משפחה</label>
+
+            </div>
+
+            <div class="form-outline mb-4 col-4">
+              <input type="text" id="tzS" class="form-control" name="tzS" [(ngModel)]="student.Tz" #tzS="ngModel"
+                required pattern="[0-9 ]*" minlength="8" maxlength="9" />
+              <div class="form-group">
+                <div class="alert-danger" *ngIf="tzS.invalid && (tzS.dirty || tzS.touched)">
+                  <div class="alert-danger" *ngIf="tzS.errors.required"> שדה חובה!</div>
+                  <div class="alert-danger" *ngIf="tzS.errors.pattern">ערכים לא תקינים!</div>
+                  <div class="alert-danger" *ngIf="tzS.errors.minlength"> חובה להזין 9 ספות </div>
+                </div>
+              </div>
+              <label class="form-label" for="tzS">תעודת זהות</label>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-outline mb-4 col-4">
+              <input type="text" id="phon1S" class="form-control" name="phon1S" [(ngModel)]="student.phonNamber"
+                #phon1S="ngModel" required pattern="[0-9 ]*" minlength="9" maxlength="10" />
+              <div class="form-group">
+                <div class="alert-danger" *ngIf="phon1S.invalid && (phon1S.dirty || phon1S.touched)">
+                  <div class="alert-danger" *ngIf="phon1S.errors.required"> שדה חובה!</div>
+                  <div class="alert-danger" *ngIf="phon1S.errors.pattern">ערכים לא תקינים</div>
+                  <div class="alert-danger" *ngIf="phon1S.errors.minlength"> חסר ספרות </div>
+                </div>
+              </div>
+              <label class="form-label" for="phon1S">טלפון</label>
+
+            </div>
+
+            <div class="form-outline mb-4 col-4">
+              <input type="text" id="phon2S" class="form-control" name="phon2S" [(ngModel)]="student.phonNamber1"
+                #phon2S="ngModel" pattern="[0-9 ]*" minlength="9" maxlength="10" />
+              <label class="form-label" for="phon2S">2 טלפון</label>
+              <div class="form-group">
+                <div class="alert-danger" *ngIf="phon2S.invalid && (phon2S.dirty || phon2S.touched)">
+                  <div class="alert-danger" *ngIf="phon2S.errors.pattern">ערכים לא תקינים</div>
+                  <div class="alert-danger" *ngIf="phon2S.errors.minlength"> חסר ספרות </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- פרטי הורים-->
+          <div class="row">
+            <div class="form-outline mb-4 col-4 ">
+              <input type="text" id="nameFS" class="form-control" name="nameFS" [(ngModel)]="student.FatherName"
+                #nameFS="ngModel" required pattern="[A-Za-zא-ת ]*" />
+              <div class="form-group">
+                <div class="alert-danger" *ngIf="nameFS.invalid && (nameFS.dirty || nameFS.touched)">
+                  <div class="alert-danger" *ngIf="nameFS.errors.required"> שדה חובה!</div>
+                  <div class="alert-danger" *ngIf="nameFS.errors.pattern">ערכים לא תקינים!</div>
+                </div>
+              </div>
+              <label class="form-label" for="nameFS">שם אב</label>
+
+            </div>
+
+            <div class="form-outline mb-4 col-4">
+              <input type="text" id="tzFS" class="form-control" name="tzFS" [(ngModel)]="student.TzFather"
+                #tzFS="ngModel" required pattern="[0-9 ]*" minlength="8" maxlength="9" />
+              <div class="form-group">
+                <div class="alert-danger" *ngIf="tzFS.invalid && (tzFS.dirty || tzFS.touched)">
+                  <div class="alert-danger" *ngIf="tzFS.errors.required"> שדה חובה!</div>
+                  <div class="alert-danger" *ngIf="tzFS.errors.pattern">ערכים לא תקינים!</div>
+                  <div class="alert-danger" *ngIf="tzFS.errors.minlength"> חובה להזין 9 ספות </div>
+                </div>
+              </div>
+              <label class="form-label" for="tzFS">תעודת זהות אב</label>
+            </div>
+
+            <div class="form-outline mb-4 col-4">
+              <input type="text" id="phonFS" class="form-control" name="phonFS" [(ngModel)]="student.phonFather"
+                name="phonFS" #phonFS="ngModel" required pattern="[0-9 ]*" minlength="9" maxlength="10" />
+              <div class="form-group">
+                <div class="alert-danger" *ngIf="phonFS.invalid && (phonFS.dirty || phonFS.touched)">
+                  <div class="alert-danger" *ngIf="phonFS.errors.required"> שדה חובה!</div>
+                  <div class="alert-danger" *ngIf="phonFS.errors.pattern">ערכים לא תקינים</div>
+                  <div class="alert-danger" *ngIf="phonFS.errors.minlength"> חסר ספרות </div>
+                </div>
+              </div>
+              <label class="form-label" for="phonFS">טלפון אב</label>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="form-outline mb-4 col-4">
+              <input type="text" id="nameMS" class="form-control" name="nameMS" [(ngModel)]="student.MotherName"
+                #nameMS="ngModel" required pattern="[A-Za-zא-ת ]*" />
+              <div class="form-group">
+                <div class="alert-danger" *ngIf="nameMS.invalid && (nameMS.dirty || nameMS.touched)">
+                  <div class="alert-danger" *ngIf="nameMS.errors.required"> שדה חובה!</div>
+                  <div class="alert-danger" *ngIf="nameMS.errors.pattern">ערכים לא תקינים!</div>
+                </div>
+              </div>
+              <label class="form-label" for="nameMS">שם אם</label>
+
+            </div>
+
+            <div class="form-outline mb-4 col-4">
+              <input type="text" id="tzMS" class="form-control" name="tzMS" [(ngModel)]="student.TzMother"
+                #tzMS="ngModel" required pattern="[0-9 ]*" minlength="8" maxlength="9" />
+              <div class="form-group">
+                <div class="alert-danger" *ngIf="tzMS.invalid && (tzMS.dirty || tzMS.touched)">
+                  <div class="alert-danger" *ngIf="tzMS.errors.required"> שדה חובה!</div>
+                  <div class="alert-danger" *ngIf="tzMS.errors.pattern">ערכים לא תקינים!</div>
+                  <div class="alert-danger" *ngIf="tzMS.errors.minlength"> חובה להזין 9 ספות </div>
+                </div>
+              </div>
+              <label class="form-label" for="tzMS">תעודת זהות אם</label>
+
+            </div>
+
+            <div class="form-outline mb-4 col-4">
+              <input type="text" id="phonMS" class="form-control" name="phonMS" [(ngModel)]="student.phonMother"
+                #phonMS="ngModel" required pattern="[0-9 ]*" minlength="9" maxlength="10" />
+              <div class="form-group">
+                <div class="alert-danger" *ngIf="phonMS.invalid && (phonMS.dirty || phonMS.touched)">
+                  <div class="alert-danger" *ngIf="phonMS.errors.required"> שדה חובה!</div>
+                  <div class="alert-danger" *ngIf="phonMS.errors.pattern">ערכים לא תקינים</div>
+                  <div class="alert-danger" *ngIf="phonMS.errors.minlength"> חסר ספרות </div>
+                </div>
+              </div>
+              <label class="form-label" for="phonMS">טלפון אם</label>
+
+            </div>
+          </div>
+        </fieldset>
+        <!-- <div *ngIf="permission == 1 && !addStudent" style="float: left;"> -->
+
+        <div *ngIf="permission == 1 && !addStudent" style="float: left;">
+          <!--edit student-->
+          <button type="button" [hidden]="!disabledStudent" (click)="disabledStudent=!disabledStudent" mdbBtn
+            color="primary" class="waves-light" mdbWavesEffect>עריכה</button>
+          <!-- <button type="button" class="btn btn-success"  [disabled]="studentForm.invalid" mdbBtn  class="waves-light" mdbWavesEffect >שמור</button>
+      <button type="button" class="btn btn-danger" (click)="cancelEdit()" mdbBtn  outline="true" class="waves-effect" mdbWavesEffect>Danger</button> -->
+          <button [hidden]="disabledStudent" [disabled]="studentForm.invalid" mdbBtn color="primary"
+            class="waves-light btn success" mdbWavesEffect   >שמור</button>
+          <button [hidden]="disabledStudent" type="button" (click)="cancelEdit()" mdbBtn color="primary" outline="true"
+            class="waves-effect btn danger" mdbWavesEffect>בטל</button>
+        </div>
+
+        <div *ngIf="permission == 1 && addStudent">
+          <!--add student-->
+          <!-- <button type="button" class="btn btn-success"  mdbWavesEffect [disabled]="studentForm.invalid">שמור</button>
+      <button type="button" class="btn btn-danger" (click)="cancelAdd()" mdbBtn color="primary" outline="true" class="waves-effect" mdbWavesEffect>בטל</button> -->
+          <button mdbBtn color="primary" class="waves-light btn success" mdbWavesEffect
+            [disabled]="studentForm.invalid">שמור</button>
+          <button type="button" (click)="cancelAdd()" mdbBtn color="primary" outline="true"
+            class="waves-effect btn danger" mdbWavesEffect>בטל</button>
+        </div>
+      </form>
+    </div>
+  </mat-tab>
+
+  <!-- אבחון ראשוני -->
+  <mat-tab >
+    <ng-template mat-tab-label *ngIf="!addStudent">
+      <!-- <mat-icon>playlist_add_check</mat-icon> -->
+    אבחון ראשוני
+    </ng-template>
+    <div class="container" style=" text-align: right;">
+ <app-list-first-diagnosis [idStudent]="student.IdStudent" ></app-list-first-diagnosis>
+ <button (click)="tabGroup.selectedIndex=3">
+  כתיבת דיווח
+</button>
+</div>
+  </mat-tab>
+
+  <!-- <div  (mousedown)="navigateTasks()">aaaaaaaa</div> -->
+  <!-- מטלות -->
+  <mat-tab *ngIf="!addStudent"  (mousedown)="navigate">
+    <ng-template mat-tab-label>
+      מטלות
+    </ng-template>
+  <app-list-task [id]="this.student.IdStudent"></app-list-task>
+  </mat-tab>
+
+  <!-- דיווחים -->
+  <mat-tab *ngIf="!addStudent" >
+    <ng-template mat-tab-label>
+      דיווחים
+    </ng-template>
+    <app-list-report [id]="this.student.IdStudent"></app-list-report>
+  </mat-tab>
+
+  <!-- רשימת מאבחנים -->
+  <mat-tab  *ngIf="permission == 1 && !addStudent">
+    <ng-template mat-tab-label>
+      רשימת מאבחנים
+    </ng-template>
+    <div style="padding: 5% 35% 0% ;">
+      <div class="">
+
+<table mdbTable  >
+  <thead>
+  <tr >
+    <th><b>שם מאבחן</b></th>
+    <th><b>מייל</b></th>
+    <th><b>טלפון</b></th>
+  </tr>
+  </thead>
+  <tbody>
+     <tr *ngFor="let diagnostic of student.listDiagnostics; let i=index">
+
+    <td> {{diagnostic.FirstName + " "}}{{diagnostic.LastName}}</td>
+    <td> {{diagnostic.Mail}}</td>
+    <td> {{diagnostic.Phon}}</td>
+
+  </tr>
+  </tbody>
+
+</table>
+        <!-- <mat-selection-list #shoes [multiple]="false">
+          <mat-list-option *ngFor="let diagnostic of student.listDiagnostics">
+            {{diagnostic.FirstName + " "}}{{diagnostic.LastName}}
+          </mat-list-option>
+        </mat-selection-list> -->
+
+      </div>
+      <button type="button" mdbBtn style="margin-right: 12%;" color="primary" outline="true" mdbWavesEffect
+        rounded="true" data-toggle="modal" data-target="#basicExample" (click)="showSelectDiagnostic(frame) ">הוסף מאבחן
+        לתלמיד</button>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+
+
+
+<!-- דילוג הוספת מאבחן לתלמיד -->
+<div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-info" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <button type="button" class="close" style="position: inherit!important" data-dismiss="modal" aria-label="Close"
+          (click)="frame.hide()">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+        <p class="heading lead">הוספת מאבחן לתלמיד</p>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <div class="text-center">
+          <mat-form-field class="example-full-width">
+            <mat-select (selectionChange)="checkedDiagnostic($event.value)">
+              <input matInput (keyup)="onKey($event.target.value)" placeholder="חיפוש">
+              <mat-option *ngFor="let diagnostic of selectedlistDiagnostic" [value]="diagnostic"
+                style="text-align: right;"> {{diagnostic.FirstName}} {{diagnostic.LastName}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" (click)="addDiagnosticToStudent(frame)" mdbBtn color="primary" class="waves-light"
+          mdbWavesEffect>הוסף
+        </a>
+        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" mdbWavesEffect
+          (click)="frame.hide()">ביטול</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+
+</div>

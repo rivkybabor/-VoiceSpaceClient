@@ -1,0 +1,28 @@
+
+
+
+<table mdbTable  >
+  <thead>
+  <tr >
+    <th><b>מספר שאלה</b></th>
+    <th><b>שאלה</b></th>
+    <th><b>הקלטה</b></th>
+  </tr>
+  </thead>
+  <tbody>
+     <tr *ngFor="let diagnosis of listFirstDiagnosis; let i=index">
+    <td>{{i+1}}</td>
+    <td>{{diagnosis.textQuestion}}</td>
+<td>
+  <audio controls preload='none'>
+    <source    src="https://private.call2all.co.il/ym/api/DownloadFile?token=033064430:30020010&path=ivr2:/100/1/003.wav" type='audio/wav'>
+    </audio>
+
+</td>
+  </tr>
+  </tbody>
+
+</table>
+
+
+

@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>דיווח חדש</h1>
+<form #newReport="ngForm">
+
+<div mat-dialog-content>
+  <p>כותרת</p>
+  <mat-form-field>
+    <mat-label>הכנס כותרת</mat-label>
+    <input matInput [(ngModel)]="report.Title" name="title" #title="ngModel" required>
+  </mat-form-field>
+</div>
+<div mat-dialog-content>
+  <p>דיווח</p>
+  <mat-form-field>
+    <mat-label>כתוב דיווח</mat-label>
+    <textarea matInput [(ngModel)]="report.report" rows="15" name="report" #report="ngModel" required></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button  [disabled]="newReport.invalid" (click)="addReport(report.Title,report.report)">הוספה</button>
+  <button mat-button mat-dialog-close>ביטול</button>
+</div>
+
+
+</form>

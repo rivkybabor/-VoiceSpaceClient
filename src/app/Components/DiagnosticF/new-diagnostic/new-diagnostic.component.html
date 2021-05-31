@@ -1,0 +1,127 @@
+<h4 *ngIf="!addDiagnostic" style="text-align: center;">המאבחן: {{ diagnostic.FirstName + " "+ diagnostic.LastName}}</h4>
+<h2 *ngIf="addDiagnostic">הוספת מאבחן</h2>
+<div>
+  <!-- <a [routerLink]="['/Manager/ListStudent']">חזור לרשימת המאבחנים</a> -->
+</div>
+  <div class="container">
+
+<form  (ngSubmit)="submit()">
+  <fieldset>
+  <!-- פרטי מאבחן-->
+<div class="row">
+  <div class="form-outline mb-4 col-4">
+    <input type="text" id="firstNameD" name="firstNameD" [(ngModel)]="newUser.FirstName" class="form-control  ng-invalid ng-dirty ng-touched"  #firstNameD="ngModel" required pattern="[A-Za-zא-ת ]*"/>
+    <div class="form-group">
+      <div class="alert-danger" *ngIf="firstNameD.invalid && (firstNameD.dirty || firstNameD.touched)">
+        <div class="alert-danger" *ngIf="firstNameD.errors.required"> שדה חובה!</div>
+        <div class="alert-danger" *ngIf="firstNameD.errors.pattern">ערכים לא תקינים!</div>
+      </div>
+    </div>
+    <label class="form-label" for="firstNameD">שם פרטי</label>
+  </div>
+
+  <div class="form-outline mb-4 col-4">
+    <input type="text" id="lastNameD" name="lastNameD" [(ngModel)]="newUser.LastName"  class="form-control ng-invalid ng-dirty ng-touched"  #lastNameD="ngModel" required pattern="[A-Za-zא-ת ]*" />
+    <label class="form-label" for="lastNameD">שם משפחה</label>
+    <div class="form-group">
+      <div class="alert-danger" *ngIf="lastNameD.invalid && (lastNameD.dirty || lastNameD.touched)">
+        <div class="alert-danger" *ngIf="lastNameD.errors.required"> שדה חובה!</div>
+        <div class="alert-danger" *ngIf="lastNameD.errors.pattern">ערכים לא תקינים!</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-outline mb-4 col-4">
+    <input type="text" id="tzD" name="tzD" [(ngModel)]="newUser.Tz" class="form-control" class="form-control ng-invalid ng-dirty ng-touched"  #tzD="ngModel" required pattern="[0-9 ]*"
+    minlength="8" maxlength="9" />
+    <label class="form-label" for="tzD">תעודת זהות</label>
+    <div class="form-group">
+      <div class="alert-danger" *ngIf="tzD.invalid && (tzD.dirty || tzD.touched)">
+        <div class="alert-danger" *ngIf="tzD.errors.required"> שדה חובה!</div>
+        <div class="alert-danger" *ngIf="tzD.errors.pattern">ערכים לא תקינים!</div>
+        <div class="alert-danger" *ngIf="userTZ.errors.minlength">  חובה להזין 9 ספות  </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="row">
+  <div class="form-outline mb-4 col-4">
+    <input type="text" id="mailD" name="mailD" [(ngModel)]="newUser.Mail"  class="form-control ng-invalid ng-dirty ng-touched"  #mailD="ngModel" required pattern="[^@]*@[^@]*" />
+    <div class="form-group">
+      <div class="alert-danger" *ngIf="mailD.invalid && (mailD.dirty || mailD.touched)">
+        <div class="alert-danger" *ngIf="mailD.errors.required"> שדה חובה!</div>
+        <div class="alert-danger" *ngIf="mailD.errors.pattern">כתובת מייל אינה תקינה !</div>
+      </div>
+    </div>
+    <label class="form-label" for="mailD">מייל</label>
+  </div>
+
+  <div class="form-outline mb-4 col-4">
+    <input type="text" id="phonD" name="phonD" [(ngModel)]="newUser.Phon" class="form-control ng-invalid ng-dirty ng-touched" #phonD="ngModel" required
+    pattern="[0-9 ]*" minlength="9" maxlength="10" />
+    <div class="form-group">
+      <div class="alert-danger" *ngIf="phonD.invalid && (phonD.dirty || phonD.touched)">
+        <div class="alert-danger" *ngIf="phonD.errors.required"> שדה חובה!</div>
+        <div class="alert-danger" *ngIf="phonD.errors.pattern">ערכים לא תקינים</div>
+        <div class="alert-danger" *ngIf="phonD.errors.minlength">  חסר ספרות  </div>
+      </div>
+    </div>
+    <label class="form-label" for="phonD">טלפון</label>
+  </div>
+  <div class="form-outline mb-4 col-4">
+    <mat-select (selectionChange)="checkedPermission($event.value)"name="hrsha"  required>
+     <mat-option [value]="1" >הרשאת מנהל</mat-option>
+     <mat-option [value]="2" >הרשאת מאבחן</mat-option>
+   </mat-select>
+   <!-- <div class="form-group">
+    <div class="alert-danger" *ngIf="hrsha.invalid && (hrsha.dirty || hrsha.touched)">
+      <div class="alert-danger" *ngIf="hrsha.errors.required"> שדה חובה!</div>
+    </div>
+  </div> -->
+  <label class="mdb-main-label">בחר הרשאה</label>
+</div>
+  </div>
+
+  <div class="row">
+    <div class="form-outline mb-4 col-4">
+      <input type="text" id="userNameD" name="userNameD" [(ngModel)]="newUser.UserName" class="form-control" [(ngModel)]="newUser.LastName"  class="form-control ng-invalid ng-dirty ng-touched"  #userNameD="ngModel" required pattern="[A-Za-zא-ת ]*" />
+      <div class="form-group">
+        <div class="alert-danger" *ngIf="userNameD.invalid && (userNameD.dirty || userNameD.touched)">
+          <div class="alert-danger" *ngIf="userNameD.errors.required"> שדה חובה!</div>
+          <div class="alert-danger" *ngIf="userNameD.errors.pattern">ערכים לא תקינים!</div>
+        </div>
+      </div>
+      <label class="form-label" for="userNameD">שם משתמש</label>
+    </div>
+
+    <div class="form-outline mb-4 col-4">
+      <input type="password" id="passwordD" name="passwordD" [(ngModel)]="newUser.Password" class="form-control" #passwordD="ngModel" required pattern="[A-Za-zא-ת ]*"/>
+      <div class="form-group">
+        <div class="alert-danger" *ngIf="passwordD.invalid && (passwordD.dirty || passwordD.touched)">
+          <div class="alert-danger" *ngIf="passwordD.errors.required"> שדה חובה!</div>
+          <div class="alert-danger" *ngIf="passwordD.errors.pattern">ערכים לא תקינים!</div>
+        </div>
+      </div>
+      <label class="form-label" for="passwordD">סיסמה</label>
+    </div>
+  </div>
+ 
+
+ <!-- <div *ngIf=" !addDiagnostic" style="float: left;"> -->
+          <!--edit diagnostic-->
+          
+
+          <!-- <button [hidden]="disabledStudent" [disabled]="studentForm.invalid" mdbBtn color="primary"
+            class="waves-light btn success" mdbWavesEffect>שמור</button>
+          <button [hidden]="disabledStudent" type="button" (click)="cancelEdit()" mdbBtn color="primary" outline="true"
+            class="waves-effect btn danger" mdbWavesEffect>בטל</button>
+        </div> -->
+
+
+
+
+  </fieldset>
+  <button mdbWavesEffect *ngIf="addDiagnostic" type="submit" mdbBtn style="background-color: #00bcd4" >הוספה</button>
+  <button mdbWavesEffect *ngIf="!addDiagnostic" type="submit"  mdbBtn style="background-color: #00bcd4"  >שמירה</button>
+  </form>
+

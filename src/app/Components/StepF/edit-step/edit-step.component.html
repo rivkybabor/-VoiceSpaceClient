@@ -1,0 +1,60 @@
+<form [formGroup]="editStepForm">
+  <h2 mat-dialog-title>עריכת שלב</h2>
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label> שם שלב </mat-label>
+      <input type="text" matInput formControlName="StepName" [(ngModel)]="editStep.StepName">
+    </mat-form-field>
+
+
+    <div style="text-align: right; direction: rtl;">
+      <div class="row">
+        <ngb-datepicker class="hebrew" style="text-align: left;" [(ngModel)]="dateOfAssignment"
+          formControlName="DateOfAssignment" name="dateOfAssignment" [displayMonths]="1" [firstDayOfWeek]="7"
+          [dayTemplate]="dt" [dayTemplateData]="dayTemplateData">
+        </ngb-datepicker>
+        <ng-template #dt let-date let-data="data" let-selected="selected" let-currentMonth="currentMonth">
+          <div class="hebrew-day" [class.outside]="date.month !== currentMonth" [class.selected]="selected">
+            <div class="gregorian-num">{{ data.gregorian.day + '/' + (data.gregorian.month) }}</div>
+            <div class="hebrew-num">{{ i18n.getDayNumerals(date) }}</div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div>
+       <mat-form-field>
+        <mat-label>
+          תיאור השלב</mat-label>
+        <input type="text" matInput formControlName="Describe" [(ngModel)]="editStep.Describe">
+
+      </mat-form-field>
+    </div>
+      <div>
+      <mat-form-field>
+        <mat-label>סטטוס</mat-label>
+        <mat-select  formControlName="Status" (selectionChange)="checkedStatus($event.value)" [(ngModel)]="idStatus">
+          <mat-option *ngFor="let status of this.statusSer.listStatus" [selected]="status.IdStatus==idStatus" [value]="status.IdStatus">{{status.StatusName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+
+
+      <!-- <mat-form-field>
+        <mat-label> ציון </mat-label>
+        <input type="number" formControlName="Mark" matInput [(ngModel)]="editStep.Mark">
+
+      </mat-form-field> -->
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions style="text-align: left; direction: ltr;">
+    <button mat-button mat-dialog-close>ביטול</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-button color="primary" (click)="editStepFunc()">אישור</button>
+  </mat-dialog-actions>
+
+
+
+</form>

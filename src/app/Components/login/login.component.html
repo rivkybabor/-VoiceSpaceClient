@@ -1,0 +1,51 @@
+<!-- <div class="container">
+<form [formGroup]="registerForm" (ngSubmit)="login()">
+  <mat-form-field hintLabel="עד 10 תווים" appearance="outline" class="example-full-width">
+    <mat-label>שם משתמש</mat-label>
+    <input matInput #input maxlength="10" formControlName="userNameFC" [(ngModel)]="userName"> -->
+    <!-- <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint> -->
+    <!-- <mat-error *ngIf="f.userNameFC.invalid">{{getErrorMessage()}}</mat-error> -->
+  <!-- </mat-form-field>
+<br>
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>הכנס סיסמה</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="passwordFC" [(ngModel)]="password"> -->
+        <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"> -->
+        <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
+        <!-- </button> -->
+        <!-- <mat-error *ngIf="f.passwordFC.invalid">{{getErrorMessage()}}</mat-error> -->
+      <!-- </mat-form-field>
+<br>
+      <button type="submit">כניסה</button>
+</form>
+</div> -->
+
+<div class="login">
+<!-- Default form login -->
+<form class="text-center border border-light p-5" [formGroup]="registerForm" (ngSubmit)="login()">
+
+  <p class="h4 mb-4">כניסה</p>
+
+  <!-- Email -->
+  <input type="text" formControlName="userNameFC" [(ngModel)]="userName" id="defaultLoginFormUserName" class="form-control mb-4" placeholder="שם משתמש">
+  <!-- Password -->
+  <input type="password" formControlName="passwordFC" [(ngModel)]="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="סיסמה">
+  <div class="invalid-tooltip">
+    Please choose a unique and valid username.
+  </div>
+  <div class="d-flex justify-content-around">
+
+    <div>
+      <!-- Forgot password -->
+      <a href="">שכחת סיסמה?</a>
+    </div>
+  </div>
+
+  <!-- Sign in button -->
+  <button mdbBtn color="info" block="true" class="my-4" type="submit">כניסה</button>
+
+
+
+</form>
+</div>
+<!-- Default form login -->

@@ -1,0 +1,4 @@
+<div class="container">
+  <button (click)="addNewReport()" mdbBtn color="primary" outline="true" class="waves-effect" mdbWavesEffect>הוסף דיווח חדש</button>
+  <app-report *ngFor="let report of listReport" [report]="report"></app-report>
+</div>

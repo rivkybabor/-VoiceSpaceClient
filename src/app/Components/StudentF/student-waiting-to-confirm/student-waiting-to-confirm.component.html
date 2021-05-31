@@ -1,0 +1,37 @@
+<div class="container" style="text-align: right;">
+
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <div class="md-form">
+        <input  dir="rtl"
+          type="text"
+          [(ngModel)]="searchText"
+          class="form-control"
+          id="search"
+          mdbInput
+        />
+        <label for="search" dir="rtl">חיפוש</label>
+      </div>
+    </div>
+  </div>
+  <table mdbTable class="z-depth-1 table-hover"   scrollY="true"   dir="rtl" style="text-align: right;">
+    <thead>
+      <tr>
+        <th *ngFor="let head of headElements; let i = index" aria-controls="tableSortExample" scope="col" [mdbTableSort]="elements" [sortBy]="headElementsToSort[i]">{{head | titlecase}}
+          <mdb-icon fas icon="sort"></mdb-icon>
+        </th>
+
+      </tr>
+    </thead>
+    <tbody hover="true" striped="true">
+      <tr *ngFor="let el of elements; let i = index" (click)="confirmOrDelete(el)" >
+        <th scope="row">{{el.tz}} </th>
+        <td >{{el.first}}</td>
+        <th scope="row">{{el.last}} </th>
+        <td >{{el.phon}}</td>
+       </tr>
+    </tbody>
+  </table>
+
+
+</div>

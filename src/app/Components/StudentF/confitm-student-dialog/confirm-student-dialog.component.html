@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>אישור תלמיד</h1>
+<div mat-dialog-content>האם ברצונך לאשר את הוספת התלמיד {{data.student.FirstName}} {{data.student.LastName}}</div>
+<div mat-dialog-actions>
+  <button mat-button  (click)="addStudent()">הוספה</button>
+  <button mat-button (click)="removeStudent()">מחיקה</button>
+  <button mat-button mat-dialog-close>ביטול</button>
+
+
+</div>

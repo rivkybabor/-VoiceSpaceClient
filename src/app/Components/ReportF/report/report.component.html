@@ -1,0 +1,16 @@
+<mat-card >
+  <div (click)="showOrHide=!showOrHide">
+     <mat-card-title >{{report.Title}}	</mat-card-title>
+
+  <mat-card-subtitle>  {{report.Diagnostic.FirstName +" "+report.Diagnostic.LastName+"  "}}
+
+    {{report.HebrewDate}}
+  </mat-card-subtitle>
+
+  </div>
+
+  <mat-card-content [hidden]="showOrHide"  [innerHTML]="report.report | linebreaksPipe"> 	</mat-card-content>
+</mat-card>
+
+
+<hr>

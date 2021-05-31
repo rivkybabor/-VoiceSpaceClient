@@ -1,0 +1,98 @@
+<div class="container" style="text-align: right;">
+  <h2 style="text-align: right;" dir="rtl" *ngIf="diagnostic || permission==2">  רשימת התלמידים של המאבחן </h2>
+  <h2 style="text-align: right;" dir="rtl" *ngIf="!diagnostic &&  permission==1">  רשימת התלמידים הכללית </h2>
+
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <div class="md-form">
+        <input  dir="rtl"
+          type="text"
+          [(ngModel)]="searchText"
+          class="form-control"
+          id="search"
+          mdbInput
+          style="text-align: right !important;"
+        />
+        <label for="search" dir="rtl">חיפוש</label>
+      </div>
+    </div>
+  </div>
+
+  <table style=" text-align: right;" mdbTable class="z-depth-1 table-hover" id="tableSortExample"  scrollY="true"   dir="rtl" >
+    <thead>
+      <tr>
+        <th
+          *ngFor="let head of headElements; let i = index" aria-controls="tableSortExample" class="blue-text"
+          scope="col" [mdbTableSort]="elements" [sortBy]="headElementsToSort[i]">
+          {{head}}
+          <mdb-icon fas icon="sort"></mdb-icon>
+        </th>
+
+      </tr>
+    </thead>
+    <div class="d-flex justify-content-center" *ngIf="loaderTable">
+      <div class="spinner-border text-info" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+
+    <tbody hover="true" striped="true" >
+      <tr *ngFor="let el of elements; let i = index" (click)="showStudent(el)">
+        <th scope="row">{{el.tz}} </th>
+        <td >{{el.first}}</td>
+        <th scope="row">{{el.last}} </th>
+        <td >{{el.phon}}</td>
+       </tr>
+    </tbody>
+  </table>
+
+  <button type="button" mdbBtn style="background-color: #00bcd4 !important;" rounded="true" data-toggle="modal" data-target="#basicExample"
+  mdbWavesEffect  *ngIf="permission == 1 && !diagnostic" (click)="addStudentToSchool()">  הוספת תלמיד חדש למערכת</button>
+
+</div>
+
+<button type="button" mdbBtn style="background-color: #00bcd4 !important;" rounded="true" data-toggle="modal" data-target="#basicExample"
+(click)=" showSelectStudent(frame) "  mdbWavesEffect *ngIf="permission == 1 && diagnostic">הוסף תלמיד למאבחן</button>
+
+<div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-info" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <button  type="button" class="close" style="position: inherit!important"  data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+        <p class="heading lead">הוספת תלמיד למאבחן</p>
+
+
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <div class="text-center">
+
+          <mat-form-field class="example-full-width">
+            <mat-select (selectionChange)="checkedStudent($event.value)">
+             <input matInput (keyup)="onKey($event.target.value)" placeholder="חיפוש" >
+            <mat-option *ngFor="let student of selectedlistStudent" [value]="student" style="text-align: right;" >שם: {{student.FirstName}}  {{student.LastName}}  ת"ז: {{student.Tz}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        </div>
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" (click)="addStudentToDiagnostic(frame)" mdbBtn color="primary" class="waves-light" mdbWavesEffect>הוסף
+        </a>
+        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" mdbWavesEffect (click)="frame.hide()">ביטול</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
+

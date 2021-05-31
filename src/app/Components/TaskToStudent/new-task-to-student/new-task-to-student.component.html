@@ -1,0 +1,69 @@
+<form >
+    <h1 mat-dialog-title>הוספת מטלה</h1>
+
+
+    <mat-form-field class="example-full-width" >
+  
+        <mat-label >שם מטלה</mat-label >
+          
+          <input  matInput >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <br>
+
+            <mat-label > תיאור המטלה</mat-label>
+            <!-- <input type="text" matInput formControlName="Describe" [(ngModel)]="newStep.Describe"> -->
+            <textarea matInput  ></textarea>
+          </mat-form-field>
+          <br>
+
+          <mat-label >בחר רמת קושי:  </mat-label >
+            <mat-form-field>
+              <mat-select
+              name="level" [(ngModel)]="levelList" >
+                 <mat-option *ngFor="let level of levelList" [value]="level.IdLevel">{{level.LevelName}}</mat-option>
+             </mat-select>
+            </mat-form-field>
+
+            <div class="row" dir="rtl" >
+              <div class="col-md-6">
+            <div class="row">
+              <mat-label>
+              תאריך התחלת המטלה:
+               </mat-label>
+            </div>
+            <div class="row">
+              <ngb-datepicker class="hebrew rtl" style="text-align: left;" #dp [(ngModel)]="startDate" formControlName="StartDate" name="StartDate" [displayMonths]="1" [firstDayOfWeek]="7" [dayTemplate]="dt"
+            [dayTemplateData]="dayTemplateData">
+            </ngb-datepicker>
+            
+            <ng-template #dt let-date let-data="data" let-selected="selected" let-currentMonth="currentMonth" >
+              <div class="hebrew-day" [class.outside]="date.month !== currentMonth" [class.selected]="selected">
+                <div class="gregorian-num">{{ data.gregorian.day + '/' + (data.gregorian.month) }}</div>
+                <div class="hebrew-num">{{ i18n.getDayNumerals(date) }}</div>
+              </div>
+            </ng-template>
+            </div>
+              </div>
+            
+              <div class="col-md-6">
+                <div class="row">
+                  <label>
+                   תאריך סיום המטלה:
+                  </label>
+                </div>
+                <div class="row">
+                  <ngb-datepicker class="hebrew rtl"  #dp [(ngModel)]="endDate" formControlName="EndDate" name="EndDate" [displayMonths]="1" [firstDayOfWeek]="7" [dayTemplate]="dt"
+            [dayTemplateData]="dayTemplateData">
+            </ngb-datepicker>
+            
+            <ng-template #dt let-date let-data="data" let-selected="selected" let-currentMonth="currentMonth" >
+              <div class="hebrew-day" [class.outside]="date.month !== currentMonth" [class.selected]="selected">
+                <div class="gregorian-num">{{ data.gregorian.day + '/' + (data.gregorian.month) }}</div>
+                <div class="hebrew-num">{{ i18n.getDayNumerals(date) }}</div>
+              </div>
+            </ng-template>
+                </div>
+                  </div>
+            </div>
+</form>

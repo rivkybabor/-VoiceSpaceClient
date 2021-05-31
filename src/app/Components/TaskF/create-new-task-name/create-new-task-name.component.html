@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>הוספת שם מטלה חדש</h2>
+<mat-dialog-content>
+
+  <form #addNewTaskName (ngSubmit)="add()">
+    <mat-form-field>
+      <mat-label> שם מטלה</mat-label>
+      <input matInput [(ngModel)]="nameTask" #newTaskName required name="newTaskName">
+    </mat-form-field>
+
+<div>
+   <button  [disabled]="addNewTaskName.invalid" mdbBtn color="primary"
+    class="waves-light btn success" mdbWavesEffect>הוספה</button>
+  <button type="button" (click)="cancel()" mdbBtn color="primary" outline="true"
+    class="waves-effect btn danger" mdbWavesEffect>בטל</button>
+
+</div>
+
+ </form>
+  </mat-dialog-content>

@@ -1,0 +1,60 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark cyan" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" [routerLink]="['ListDiagnostic']" >LOGO</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto">
+
+      <li class="nav-item " [routerLinkActive]="['active']" *ngIf="permission==1">
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['ListDiagnostic']" >מאבחנים</a>
+      </li>
+
+      <li class="nav-item dropdown" dropdown dir="ltr" *ngIf="permission==1">
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          תלמידים<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu  dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" style="text-align: right;" mdbWavesEffect [routerLink]="['ListStudent']">רשימת תלמידים</a>
+          <a class="dropdown-item waves-light" style="text-align: right;"  mdbWavesEffect [routerLink]="['StudentWaitingConfirm']">תלמידים ממתינים לאישור</a>
+        </div>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']" *ngIf="permission!=1">
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['ListStudent']">תלמידים</a>
+      </li>
+
+       <li class="nav-item dropdown" dropdown dir="ltr">
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          מטלות<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu  dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" style="text-align: right;" mdbWavesEffect [routerLink]="['ListTask/12']">רשימת מטלות</a>
+          <a class="dropdown-item waves-light" style="text-align: right;"  mdbWavesEffect [routerLink]="['NewTask']">הוספת מטלה</a>
+        </div>
+      </li> 
+
+      <li class="nav-item" [routerLinkActive]="['active']" >
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['NewTasktoStudent']">דוגמא</a>
+      </li>
+     
+      <!-- <li class="nav-item " [routerLinkActive]="['active']" *ngIf="permission==1">
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['StudentWaitingConfirm']" >אישור תלמידים</a>
+      </li> -->
+
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown dir="ltr">
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="user"></mdb-icon> פרופיל<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu  dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" style="text-align: right;" mdbWavesEffect href="#">אזור אישי</a>
+          <a class="dropdown-item waves-light" style="text-align: right;" mdbWavesEffect href="#">יציאה</a>
+        </div>
+      </li>
+
+    </ul>
+    <!-- Links -->
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>

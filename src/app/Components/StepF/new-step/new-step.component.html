@@ -1,0 +1,40 @@
+<form [formGroup]="newStepForm" style="text-align: right;">
+  <h2 mat-dialog-title>הוספת שלב</h2>
+  <mat-dialog-content>
+
+    <mat-form-field class="example-full-width">
+      <mat-label> שם שלב</mat-label>
+      <input type="text" matInput formControlName="StepName" [(ngModel)]="newStep.StepName">
+
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label> תיאור השלב</mat-label>
+      <!-- <input type="text" matInput formControlName="Describe" [(ngModel)]="newStep.Describe"> -->
+      <textarea matInput formControlName="Describe" [(ngModel)]="newStep.Describe"></textarea>
+    </mat-form-field>
+<div style="text-align: right; direction: rtl;">
+      <div class="row"> תאריך הטלת השלב:</div>
+      <div class="row">
+        <ngb-datepicker class="hebrew rtl" style="text-align: left;" #dp [(ngModel)]="dateOfAssignment"
+          formControlName="DateOfAssignment" name="StartDate" [displayMonths]="1" [firstDayOfWeek]="7"
+          [dayTemplate]="dt" [dayTemplateData]="dayTemplateData">
+        </ngb-datepicker>
+
+        <ng-template #dt let-date let-data="data" let-selected="selected" let-currentMonth="currentMonth">
+          <div class="hebrew-day" [class.outside]="date.month !== currentMonth" [class.selected]="selected">
+            <div class="gregorian-num">{{ data.gregorian.day + '/' + (data.gregorian.month) }}</div>
+            <div class="hebrew-num">{{ i18n.getDayNumerals(date) }}</div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>ביטול</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-button [disabled]="newStepForm.invalid" (click)="addStep()">אישור</button>
+  </mat-dialog-actions>
+
+
+
+</form>

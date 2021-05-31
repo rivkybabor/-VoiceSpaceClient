@@ -1,0 +1,53 @@
+<div class="container">
+  <h2 style="text-align: right;" dir="rtl">רשימת המאבחנים</h2>
+
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <div class="md-form" >
+        <input
+          type="text"
+          [(ngModel)]="searchText"
+          class="form-control"
+          id="search"
+          mdbInput
+        />
+        <label for="search" >חיפוש</label>
+      </div>
+    </div>
+  </div>
+  <table mdbTable   dir="rtl" style="text-align: right;" class="z-depth-1 table-hover"   scrollY="true" >
+    <thead>
+      <tr>
+        <th
+          *ngFor="let head of headElements; let i = index" class="blue-text"
+          scope="col">
+          {{head}}
+        </th>
+      </tr>
+    </thead>
+    <div class="d-flex justify-content-center" *ngIf="loaderTable">
+      <div class="spinner-border text-info" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <tbody >
+      <tr *ngFor="let el of elements; let i = index" (click)="showDiagnostic(el)">
+        <th scope="row">{{el.first}} </th>
+        <td >{{el.last}}</td>
+        <td>{{el.phon}}</td>
+        <td>{{el.mail}}</td>
+        <td><button mat-fab style="background-color:white; color: #00bcd4;" (click)="openDiagnosticDetails(el.id)" >
+          <mat-icon>group</mat-icon></button></td>
+          <td><button mat-fab style="background-color: white;color: #00bcd4;">
+          <mat-icon>delete</mat-icon></button></td>
+       </tr>
+    </tbody>
+  </table>
+
+
+<button type="button" mdbBtn style="background-color: #00bcd4 !important;" rounded="true" data-toggle="modal" data-target="#basicExample"
+  mdbWavesEffect  *ngIf="permission == 1 " (click)="addDiagnosticToSchool()">  הוספת מאבחן חדש למערכת</button>
+</div>
+
+
+

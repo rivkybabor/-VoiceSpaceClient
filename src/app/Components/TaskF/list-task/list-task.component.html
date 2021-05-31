@@ -1,0 +1,53 @@
+
+<div class="container">
+<div *ngIf="this.TaskSer.currentListTask!=undefined && this.TaskSer.currentListTask.length>0">
+
+
+  <div class="row">
+  <div class="col-md-12 mx-auto">
+    <div class="md-form" >
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        class="form-control"
+        id="search"
+        mdbInput
+      />
+      <label for="search" >חיפוש</label>
+    </div>
+  </div>
+</div>
+<table mdbTable   dir="rtl" style="text-align: right;" class="z-depth-1 table-hover"   scrollY="true" >
+  <thead>
+    <tr>
+      <th *ngFor="let head of headElements; let i = index" aria-controls="tableSortExample" scope="col" [mdbTableSort]="elements" [sortBy]="headElementsToSort[0]">{{head | titlecase}}
+        <mdb-icon fas icon="sort" *ngIf="i==0"></mdb-icon>
+        
+      </th>
+      <th>סטטוס</th>
+    </tr>
+  </thead>
+  <div class="d-flex justify-content-center" *ngIf="loaderTable">
+    <div class="spinner-border text-info" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <tbody >
+    <tr *ngFor="let el of elements; let i = index" >
+      <td >{{el.name}}</td>
+      <td>{{el.startDate}}</td>
+      <td>{{el.endDate}}</td>
+      
+
+
+      <td (click)="navigateTask(el.id)"> <i  class="fas fa-align-justify"></i></td>
+      
+   
+     </tr>
+
+  </tbody>
+</table>
+</div>
+<button  mdbBtn color="primary" outline="true" class="waves-effect" mdbWavesEffect style="text-align: center;" (click)="createNewTask()">הוספת מטלה <i class="fa fa-calendar-plus-o"></i></button>
+</div>
+
